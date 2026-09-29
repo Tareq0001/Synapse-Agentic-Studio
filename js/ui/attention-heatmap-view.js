@@ -1,6 +1,6 @@
 /**
  * Synapse-AI Multi-Head Attention Heatmap Visualizer
- * Renders interactive QKV Attention weights across Transformer heads with token inspection.
+ * Supports dynamic custom user sentence tokenization and QKV scaled dot-product attention calculation.
  */
 
 export class AttentionHeatmapView {
@@ -15,11 +15,11 @@ export class AttentionHeatmapView {
         if (!this.container) return;
 
         const tokens = this.engine.tokens;
-        const matrix = this.engine.attentionMatrices[this.currentHead];
+        const matrix = this.engine.attentionMatrices[this.currentHead] || [];
 
         this.container.innerHTML = `
             <div class="attention-studio-grid">
-                <!-- 1. Attention Heatmap Matrix -->
+                <!-- 1. Attention Heatmap Matrix & Custom Sentence Bar -->
                 <div class="card">
                     <div class="card-header">
                         <div>
@@ -27,6 +27,21 @@ export class AttentionHeatmapView {
                             <h3>Scaled Dot-Product Multi-Head Attention Matrix</h3>
                         </div>
                         <span class="stat-badge">Softmax(Q · Kᵀ / √dₖ) · V</span>
+                    </div>
+
+                    <!-- Custom Sentence Input -->
+                    <div class="custom-sentence-bar" style="margin-bottom: 14px;">
+                        <label class="text-sm text-muted font-mono" style="display: block; margin-bottom: 4px;">
+                            ✍️ Enter custom sentence to compute live attention matrix:
+                        </label>
+                        <div style="display: flex; gap: 8px;">
+                            <input type="text" id="custom-sentence-input" class="form-input font-mono text-sm" 
+                                value="${tokens.join(' ')}" 
+                                placeholder="Type any sentence (e.g. Deep learning models learn complex representations)...">
+                            <button class="btn btn-primary btn-sm" id="btn-compute-attn" style="flex-shrink: 0; white-space: nowrap;">
+                                🧮 Compute QKV
+                            </button>
+                        </div>
                     </div>
 
                     <!-- Head Switcher -->
@@ -42,7 +57,7 @@ export class AttentionHeatmapView {
                         ${this.engine.headSpecializations[this.currentHead]}
                     </div>
 
-                    <!-- 8x8 Grid Table -->
+                    <!-- NxN Grid Table -->
                     <div class="heatmap-table-wrap">
                         <table class="attention-table font-mono">
                             <thead>
@@ -56,8 +71,8 @@ export class AttentionHeatmapView {
                                     <tr>
                                         <th class="token-header row-token">${qTok}</th>
                                         ${tokens.map((kTok, cIdx) => {
-                                            const weight = matrix[rIdx][cIdx];
-                                            const intensity = Math.min(1.0, weight * 1.8);
+                                            const weight = (matrix[rIdx] && matrix[rIdx][cIdx] !== undefined) ? matrix[rIdx][cIdx] : 0.1;
+                                            const intensity = Math.min(1.0, weight * 1.9);
                                             return `
                                                 <td class="attn-cell" 
                                                     data-r="${rIdx}" 
@@ -65,7 +80,7 @@ export class AttentionHeatmapView {
                                                     data-q="${qTok}" 
                                                     data-k="${kTok}" 
                                                     data-w="${weight}"
-                                                    style="background: rgba(99, 102, 241, ${intensity}); color: ${intensity > 0.4 ? '#ffffff' : '#94a3b8'};">
+                                                    style="background: rgba(99, 102, 241, ${intensity}); color: ${intensity > 0.35 ? '#ffffff' : '#94a3b8'};">
                                                     ${weight.toFixed(2)}
                                                 </td>
                                             `;
@@ -93,7 +108,7 @@ export class AttentionHeatmapView {
                     <!-- Mathematical Formulation Card -->
                     <div class="math-card font-mono text-sm" style="margin-top: 20px;">
                         <h4 class="text-purple">Self-Attention Mathematical Mechanics:</h4>
-                        <div class="formula-line text-cyan">Attention(Q, K, V) = softmax((Q · Kᵀ) / √dₖ) · V</div>
+                        <div class="formula-line text-cyan ltr-text">Attention(Q, K, V) = softmax((Q · Kᵀ) / √dₖ) · V</div>
                         <ul class="math-bullets text-muted">
                             <li><strong>Q (Query):</strong> Representation of what token <em>wᵢ</em> is seeking.</li>
                             <li><strong>K (Key):</strong> Representation of what token <em>wⱼ</em> contains.</li>
@@ -117,6 +132,24 @@ export class AttentionHeatmapView {
             });
         });
 
+        // Compute Custom Sentence
+        const computeBtn = this.container.querySelector("#btn-compute-attn");
+        const sentenceInput = this.container.querySelector("#custom-sentence-input");
+        computeBtn?.addEventListener("click", () => {
+            const val = sentenceInput.value.trim();
+            if (val) {
+                this.engine.setCustomSentence(val);
+                if (this.synth) this.synth.playEpoch();
+                this.render();
+            }
+        });
+
+        sentenceInput?.addEventListener("keydown", (e) => {
+            if (e.key === "Enter") {
+                computeBtn?.click();
+            }
+        });
+
         // Hover Probe
         const probeBox = this.container.querySelector("#attn-probe-box");
         this.container.querySelectorAll(".attn-cell").forEach(cell => {
@@ -129,10 +162,10 @@ export class AttentionHeatmapView {
                     probeBox.innerHTML = `
                         <div class="probe-row"><span class="text-muted">Query Token (Source):</span> <strong class="text-cyan">"${q}"</strong></div>
                         <div class="probe-row"><span class="text-muted">Key Token (Target):</span> <strong class="text-purple">"${k}"</strong></div>
-                        <div class="probe-row"><span class="text-muted">Attention Weight:</span> <strong class="text-emerald" style="font-size: 16px;">${(w * 100).toFixed(1)}% (${w.toFixed(4)})</strong></div>
+                        <div class="probe-row"><span class="text-muted">Attention Weight:</span> <strong class="text-emerald" style="font-size: 16px;">${(w * 100).toFixed(1)}% (${w.toFixed(3)})</strong></div>
                         <div class="probe-row" style="margin-top: 8px;">
                             <span class="text-muted">Interpretation:</span>
-                            <span>${w > 0.35 ? 'Strong semantic/dependency binding between tokens.' : 'Weak lexical background association.'}</span>
+                            <span>${w > 0.25 ? 'High semantic affinity and contextual dependency.' : 'Low background lexical association.'}</span>
                         </div>
                     `;
                 }

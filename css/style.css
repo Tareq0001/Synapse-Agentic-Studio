@@ -47,6 +47,11 @@ body {
 .text-muted { color: var(--text-muted); }
 .text-sm { font-size: 12px; }
 
+.ltr-text {
+    direction: ltr !important;
+    text-align: left !important;
+}
+
 /* Header */
 .app-header {
     background: rgba(8, 12, 22, 0.85);
@@ -325,6 +330,18 @@ html[dir="rtl"] .kpi-item {
 .task-input-bar {
     display: flex;
     gap: 10px;
+    width: 100%;
+    align-items: center;
+}
+
+.task-input-bar .form-input {
+    flex: 1;
+    min-width: 0;
+}
+
+.task-input-bar .btn {
+    flex-shrink: 0;
+    white-space: nowrap;
 }
 
 .agent-cards-row {
@@ -369,7 +386,7 @@ html[dir="rtl"] .kpi-item {
     display: flex;
     flex-direction: column;
     gap: 10px;
-    max-height: 400px;
+    max-height: 280px;
     overflow-y: auto;
     padding-right: 6px;
 }
@@ -398,33 +415,51 @@ html[dir="rtl"] .kpi-item {
     padding: 6px 10px;
     border-radius: 6px;
     background: #090e1a;
+    direction: ltr;
+    text-align: left;
 }
 
-.memory-drawer {
-    margin-top: 16px;
+/* Artifact Box */
+.artifact-box {
     background: #090e1a;
-    border-radius: 8px;
-    padding: 12px;
     border: 1px solid var(--border-panel);
+    border-radius: 10px;
+    padding: 14px;
 }
 
-.memory-header {
+.artifact-header {
     display: flex;
     justify-content: space-between;
-    font-size: 12px;
-    margin-bottom: 8px;
+    align-items: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    padding-bottom: 8px;
+    flex-wrap: wrap;
+    gap: 8px;
 }
 
-.memory-items {
+.code-preview {
+    background: #030712;
+    padding: 14px;
+    border-radius: 8px;
+    overflow-x: auto;
+    max-height: 240px;
+    font-size: 12px;
+    line-height: 1.5;
+    color: #e2e8f0;
+    direction: ltr;
+    text-align: left;
+}
+
+.sandbox-terminal {
+    background: #000000;
+    border: 1px solid rgba(16, 185, 129, 0.3);
+    border-radius: 6px;
+    padding: 10px 14px;
     display: flex;
     flex-direction: column;
     gap: 4px;
-}
-
-.memory-tag {
-    display: flex;
-    gap: 8px;
-    font-size: 11px;
+    direction: ltr;
+    text-align: left;
 }
 
 /* 2. Attention Heatmap Styles */
@@ -452,6 +487,7 @@ html[dir="rtl"] .kpi-item {
     width: 100%;
     border-collapse: collapse;
     font-size: 12px;
+    direction: ltr;
 }
 
 .attention-table th, .attention-table td {
@@ -466,10 +502,6 @@ html[dir="rtl"] .kpi-item {
 
 .row-token {
     text-align: right !important;
-}
-
-html[dir="rtl"] .row-token {
-    text-align: left !important;
 }
 
 .attn-cell {
@@ -539,6 +571,7 @@ html[dir="rtl"] .row-token {
     border-radius: 10px;
     padding: 16px;
     border: 1px solid var(--border-panel);
+    direction: ltr;
 }
 
 .matrix-block {
