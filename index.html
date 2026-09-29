@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Synapse-AI: Autonomous Agent Studio, LLM Fine-Tuning & Data Science Workbench</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- App Header -->
+    <header class="app-header">
+        <div class="header-top">
+            <div class="brand-section">
+                <div class="brand-logo">🧠</div>
+                <div class="brand-text">
+                    <h1 data-i18n="brandTitle">استوديو سينابس (SYNAPSE-AI)</h1>
+                    <p data-i18n="brandSubtitle">منظومة تصميم الوكلاء المستقلين، تدريب وتطويع النماذج اللغوية، ومختبر علوم البيانات المتقدم</p>
+                </div>
+            </div>
+
+            <!-- Global KPIs -->
+            <div class="header-kpi-bar">
+                <div class="kpi-item">
+                    <span class="kpi-label" data-i18n="kpiAgents">الوكلاء المستقلون</span>
+                    <span class="kpi-value font-mono text-cyan">4 Swarm Agents</span>
+                </div>
+                <div class="kpi-item">
+                    <span class="kpi-label" data-i18n="kpiAttentionHeads">رؤوس الانتباه</span>
+                    <span class="kpi-value font-mono text-purple">4 Scaled Heads</span>
+                </div>
+                <div class="kpi-item">
+                    <span class="kpi-label" data-i18n="kpiLoRASavings">توفير معلمات LoRA</span>
+                    <span class="kpi-value font-mono text-emerald">99.2% Frozen</span>
+                </div>
+                <div class="kpi-item">
+                    <span class="kpi-label" data-i18n="kpiChampionAUC">دقة بطل النماذج (AUC)</span>
+                    <span class="kpi-value font-mono text-cyan">0.984 XGBoost</span>
+                </div>
+            </div>
+
+            <!-- Controls -->
+            <div class="header-actions">
+                <button class="btn btn-secondary btn-sm" id="btn-toggle-sound">🔊 Audio On</button>
+                <button class="btn btn-secondary btn-sm" id="btn-toggle-lang">English</button>
+            </div>
+        </div>
+
+        <!-- Navigation Tabs -->
+        <nav class="nav-tabs-bar">
+            <button class="nav-tab active" data-tab="agents">
+                <span data-i18n="tabAgents">🤖 تصميم الوكلاء المستقلين وسير العمل</span>
+            </button>
+            <button class="nav-tab" data-tab="attention">
+                <span data-i18n="tabAttention">🔍 مصفوفة انتباه المحولات QKV</span>
+            </button>
+            <button class="nav-tab" data-tab="lora">
+                <span data-i18n="tabLoRA">⚡ تدريب وتطويع النماذج (LoRA PEFT)</span>
+            </button>
+            <button class="nav-tab" data-tab="automl">
+                <span data-i18n="tabAutoML">📊 علوم البيانات وحلبة التعلم الآلي</span>
+            </button>
+        </nav>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="main-content">
+
+        <!-- 1. Agent Swarm Tab -->
+        <section id="tab-agents" class="tab-content active">
+            <div id="tab-agents-container"></div>
+        </section>
+
+        <!-- 2. Attention Matrix Tab -->
+        <section id="tab-attention" class="tab-content">
+            <div id="tab-attention-container"></div>
+        </section>
+
+        <!-- 3. LoRA PEFT Studio Tab -->
+        <section id="tab-lora" class="tab-content">
+            <div id="tab-lora-container"></div>
+        </section>
+
+        <!-- 4. Data Science & AutoML Tab -->
+        <section id="tab-automl" class="tab-content">
+            <div id="tab-automl-container"></div>
+        </section>
+
+    </main>
+
+    <!-- Main Module Script -->
+    <script type="module" src="js/app.js"></script>
+</body>
+</html>

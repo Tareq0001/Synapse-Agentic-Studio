@@ -1,0 +1,22 @@
+{
+  "name": "synapse-agentic-studio",
+  "version": "1.0.0",
+  "description": "Enterprise Autonomous Agent Swarms, LLM Fine-Tuning (LoRA/DPO), and Automated Data Science Workbench.",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx serve ."
+  },
+  "keywords": [
+    "autonomous-agents",
+    "multi-agent-swarm",
+    "react-loop",
+    "llm-fine-tuning",
+    "lora-peft",
+    "self-attention",
+    "automl",
+    "shap-explainability",
+    "data-science"
+  ],
+  "author": "Tareq Abuashi",
+  "license": "MIT"
+}
