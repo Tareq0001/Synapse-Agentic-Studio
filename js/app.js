@@ -4,15 +4,15 @@
  * and Data Science AutoML & Explainability into a unified studio.
  */
 
-import { SynthAudio } from "./audio/synth-audio.js?v=1.1.2";
-import { AgentSwarmEngine } from "./engine/agent-swarm.js?v=1.1.2";
-import { LLMTrainerEngine } from "./engine/llm-trainer.js?v=1.1.2";
-import { DataScienceEngine } from "./engine/data-science.js?v=1.1.2";
-import { AgentDAGView } from "./ui/agent-dag-view.js?v=1.1.2";
-import { AttentionHeatmapView } from "./ui/attention-heatmap-view.js?v=1.1.2";
-import { LoRAStudioView } from "./ui/lora-studio-view.js?v=1.1.2";
-import { AutoMLArenaView } from "./ui/automl-arena-view.js?v=1.1.2";
-import { I18nManager } from "./ui/i18n.js?v=1.1.2";
+import { SynthAudio } from "./audio/synth-audio.js?v=1.1.3";
+import { AgentSwarmEngine } from "./engine/agent-swarm.js?v=1.1.3";
+import { LLMTrainerEngine } from "./engine/llm-trainer.js?v=1.1.3";
+import { DataScienceEngine } from "./engine/data-science.js?v=1.1.3";
+import { AgentDAGView } from "./ui/agent-dag-view.js?v=1.1.3";
+import { AttentionHeatmapView } from "./ui/attention-heatmap-view.js?v=1.1.3";
+import { LoRAStudioView } from "./ui/lora-studio-view.js?v=1.1.3";
+import { AutoMLArenaView } from "./ui/automl-arena-view.js?v=1.1.3";
+import { I18nManager } from "./ui/i18n.js?v=1.1.3";
 
 class SynapseApp {
     constructor() {
