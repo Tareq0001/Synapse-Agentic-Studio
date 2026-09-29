@@ -30,11 +30,11 @@ export class AttentionHeatmapView {
                     </div>
 
                     <!-- Custom Sentence Input -->
-                    <div class="custom-sentence-bar" style="margin-bottom: 14px;">
-                        <label class="text-sm text-muted font-mono" style="display: block; margin-bottom: 4px;">
+                    <div class="custom-sentence-bar" style="margin-bottom: 14px; direction: ltr; text-align: left;">
+                        <label class="text-sm text-muted font-mono" style="display: block; margin-bottom: 4px; direction: ltr; text-align: left;">
                             ✍️ Enter custom sentence to compute live attention matrix:
                         </label>
-                        <div style="display: flex; gap: 8px;">
+                        <div style="display: flex; gap: 8px; direction: ltr;">
                             <input type="text" id="custom-sentence-input" class="form-input font-mono text-sm" 
                                 value="${tokens.join(' ')}" 
                                 placeholder="Type any sentence (e.g. Deep learning models learn complex representations)...">

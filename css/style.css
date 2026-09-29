@@ -302,6 +302,8 @@ html[dir="rtl"] .kpi-item {
     outline: none;
     font-size: 13px;
     width: 100%;
+    direction: ltr !important;
+    text-align: left !important;
 }
 
 .form-input:focus {
@@ -325,6 +327,7 @@ html[dir="rtl"] .kpi-item {
     gap: 8px;
     margin-bottom: 12px;
     flex-wrap: wrap;
+    direction: ltr !important;
 }
 
 .task-input-bar {
@@ -332,6 +335,7 @@ html[dir="rtl"] .kpi-item {
     gap: 10px;
     width: 100%;
     align-items: center;
+    direction: ltr !important;
 }
 
 .task-input-bar .form-input {
@@ -425,6 +429,7 @@ html[dir="rtl"] .kpi-item {
     border: 1px solid var(--border-panel);
     border-radius: 10px;
     padding: 14px;
+    direction: ltr !important;
 }
 
 .artifact-header {
