@@ -673,10 +673,12 @@ html[dir="rtl"] .kpi-item {
     border-collapse: collapse;
     font-size: 13px;
     text-align: left;
+    direction: ltr !important;
 }
 
 html[dir="rtl"] .data-table {
-    text-align: right;
+    direction: ltr !important;
+    text-align: left !important;
 }
 
 .data-table th, .data-table td {
@@ -758,3 +760,7 @@ html[dir="rtl"] .data-table {
 
 .shap-pos { background: var(--color-rose); }
 .shap-neg { background: var(--color-emerald); }
+
+.shap-row, .shap-summary, .confusion-matrix-box, .threshold-slider-bar, .feature-tuner-row {
+    direction: ltr !important;
+}
